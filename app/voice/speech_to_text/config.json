@@ -1,0 +1,17 @@
+[
+    {   "id": 1,
+        "name": "Speech Recognition"
+    },
+    {
+        "id": 2,
+        "name": "Open AI Whisper"
+    },
+    {
+        "id": 3,
+        "name": "Wav2Vec"
+    },
+    {
+        "id": 4,
+        "name": "Brain Speech"
+    }
+]

@@ -1,0 +1,16 @@
+
+blinker
+click
+colorama
+Flask
+Flask-RESTful
+Flask-SQLAlchemy
+greenlet
+itsdangerous
+Jinja2
+MarkupSafe
+pytz
+six
+SQLAlchemy
+typing_extensions
+Werkzeug
