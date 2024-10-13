@@ -20,6 +20,6 @@ voice_request_parser.add_argument(
 
 class VoiceRequest(BaseModel):
     base64String: str | None = None
-    speechToText: int
+    speechToText: int = 1
     enableNoiseReduction: bool = True
-    noiseReducer: int | None = None
+    noiseReducer: int = 1

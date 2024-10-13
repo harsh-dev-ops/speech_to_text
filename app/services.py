@@ -9,8 +9,8 @@ class SpeechToTextService:
 
     def __init__(
         self,
-        transcriber,
-        noise_reducer: str | None = None,
+        transcriber: SpeechBrain | Whisper | Wav2Vec2 | SpeechRecognition,
+        noise_reducer: SpeechBrainNoiseReducer | BaseNoiseReducer | None = None,
         base64String: str | None = None,
         path: str | None = None
     ):
@@ -30,28 +30,6 @@ class SpeechToTextService:
 
 
 class SpeechToTextServiceCreator:
-
-    @staticmethod
-    def _get_noise_reducer(noiseReducer: int):
-        if noiseReducer == 1:
-            return BaseNoiseReducer()
-        elif noiseReducer == 2:
-            return SpeechBrainNoiseReducer()
-        else:
-            raise Exception("Invalid noise reducer.")
-
-    @staticmethod
-    def _get_transcriber(speechToText: int):
-        if speechToText == 1:
-            return SpeechRecognition()
-        elif speechToText == 2:
-            return Whisper()
-        elif speechToText == 3:
-            return Wav2Vec2()
-        elif speechToText == 4:
-            return SpeechBrain()
-        else:
-            raise Exception("Invalid speech to text.")
 
     @staticmethod
     def speech_to_text(
@@ -89,3 +67,25 @@ class SpeechToTextServiceCreator:
             base64String=base64String,
             path=path
         )
+
+    @staticmethod
+    def _get_noise_reducer(noiseReducer: int):
+        if noiseReducer == 1:
+            return BaseNoiseReducer()
+        elif noiseReducer == 2:
+            return SpeechBrainNoiseReducer()
+        else:
+            raise Exception("Invalid noise reducer.")
+
+    @staticmethod
+    def _get_transcriber(speechToText: int):
+        if speechToText == 1:
+            return SpeechRecognition()
+        elif speechToText == 2:
+            return Whisper()
+        elif speechToText == 3:
+            return Wav2Vec2()
+        elif speechToText == 4:
+            return SpeechBrain()
+        else:
+            raise Exception("Invalid speech to text.")
