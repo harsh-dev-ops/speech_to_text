@@ -1,4 +1,3 @@
-
 blinker
 click
 colorama
@@ -14,3 +13,6 @@ six
 SQLAlchemy
 typing_extensions
 Werkzeug
+transformers 
+datasets[audio] 
+accelerate
