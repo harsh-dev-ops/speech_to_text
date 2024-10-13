@@ -1,7 +1,6 @@
 import json
 import os
 
-
 def ai_algorithms():
     algorithms = {}
     algorithms['speech_to_text'] = json.load(
