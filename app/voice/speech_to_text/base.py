@@ -10,6 +10,10 @@ class SpeechToText(ABC):
     def _load_model(self):
         pass
 
+
+class HfSpeechToText(ABC):
+
+    @abstractmethod
     def _load_processor(self):
         pass
 

@@ -47,18 +47,24 @@ class AudioToArray:
         return np.array(audio_data), sample_rate
 
 
-class AudioData(FileToBase64, AudioToArray):
-
-    def to_ndarray(
+class AudioConverter(FileToBase64, AudioToArray):
+    def __init__(
         self,
-        audio_file: str | None = None,
-        base64_string: str | None = None
-    ) -> tuple[np.ndarray, int]:
+        base64String: str | None = None,
+        path: str | None = None
+    ):
+        self.base64String = base64String
+        self.path = path
+        self.data, self.sr = self._load_audio()
 
-        if not base64_string and audio_file:
-            base64_string = self.base64_string(audio_file)
-
-        return self.base64_string_to_ndarray(base64_string)
+    def _load_audio(
+        self
+    ):
+        if self.base64String:
+            return self.base64_string_to_ndarray(
+                self.base64String)
+        elif self.path:
+            return self.audio_file_to_ndarray(self.path)
 
 
 """

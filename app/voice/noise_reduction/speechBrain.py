@@ -5,7 +5,7 @@ import torch
 from conf.methods import Singleton
 
 
-class SpeechBrainNoiseReduce():
+class SpeechBrainNoiseReducer():
     def __init__(
             self,
             model_id: str = "speechbrain/sepformer-wham16k-enhancement",

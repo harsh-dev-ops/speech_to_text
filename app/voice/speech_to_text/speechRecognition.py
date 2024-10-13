@@ -40,4 +40,4 @@ class SpeechRecognition:
         except speech_recognition.RequestError as e:
             print(f"Could not request results from service; {e}")
 
-        return text if text else ""
+        return text.lower() if text else ""

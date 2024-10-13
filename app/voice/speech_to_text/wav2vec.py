@@ -3,10 +3,10 @@ from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
 from datasets import load_dataset
 import torch
 
-from base import SpeechToText
+from base import HfSpeechToText, SpeechToText
 
 
-class Wav2Vec2(SpeechToText):
+class Wav2Vec2(HfSpeechToText, SpeechToText):
     def __init__(
         self,
         model_id: str = "facebook/wav2vec2-large-960h"
@@ -36,4 +36,4 @@ class Wav2Vec2(SpeechToText):
         predicted_ids = torch.argmax(logits, dim=-1)
         transcription = self.processor.batch_decode(predicted_ids)
 
-        return transcription[0]
+        return transcription[0].lower()

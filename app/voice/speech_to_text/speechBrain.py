@@ -2,7 +2,7 @@ from speechbrain.inference import EncoderDecoderASR
 import numpy as np
 import torch
 
-from app.main import SpeechToText
+from base import SpeechToText
 
 
 class CustomEncoderDecoderASR(EncoderDecoderASR):
@@ -54,4 +54,4 @@ class SpeechBrain(SpeechToText):
         ndarray: np.ndarray,
         sr: int
     ):
-        return self.model.transcribe_ndarray(ndarray, sr)
+        return self.model.transcribe_ndarray(ndarray, sr).lower()

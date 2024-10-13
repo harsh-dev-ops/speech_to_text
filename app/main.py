@@ -21,17 +21,13 @@ class SpeechToTextView(Resource):
 
 class FileUpload(Resource):
     def post(self):
-        # Check if the file was uploaded
+
         if 'file' not in request.files:
             return {'message': 'No file part in the request'}, 400
-
         file = request.files['file']
 
-        # Check if the file has a filename
         if file.filename == '':
             return {'message': 'No selected file'}, 400
-
-        # Save the file
         try:
             file.save('uploads/' + file.filename)
             return {'message': 'File uploaded successfully'}, 201
@@ -39,7 +35,7 @@ class FileUpload(Resource):
             return {'message': 'Failed to upload file: ' + str(e)}, 500
 
 
-api.add_resource(FileUpload, '/upload')
+api.add_resource(FileUpload, '/media')
 api.add_resource(SpeechToTextView, '/')
 
 if __name__ == "__main__":

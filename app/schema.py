@@ -1,14 +1,25 @@
 from flask_restful import fields, reqparse
+from pydantic import BaseModel
 
 
 VoiceRequestSchema = {
-    "audio": fields.String
+    "base64String": fields.String,
+    "speechToText": fields.Integer,
+    "enableNoiseReduction": fields.Boolean,
+    "noiseReducer": fields.Integer
 }
 
 voice_request_parser = reqparse.RequestParser()
 voice_request_parser.add_argument(
-    'audio',
+    'base64String',
     type=str,
     required=True,
-    help="Audio needed in base64 string format."
+    help="base64String needed in string format."
 )
+
+
+class VoiceRequest(BaseModel):
+    base64String: str | None = None
+    speechToText: int
+    enableNoiseReduction: bool = True
+    noiseReducer: int | None = None

@@ -3,10 +3,10 @@ import torch
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor
 from datasets import Audio, load_dataset
 
-from base import SpeechToText
+from base import HfSpeechToText, SpeechToText
 
 
-class Whisper(SpeechToText):
+class Whisper(HfSpeechToText, SpeechToText):
     def __init__(
         self,
         model_id: str = "openai/whisper-large-v3"
@@ -56,4 +56,4 @@ class Whisper(SpeechToText):
         pred_text = self.processor.batch_decode(
             pred_ids, skip_special_tokens=True, decode_with_timestamps=False)
 
-        return pred_text
+        return pred_text.lower()
