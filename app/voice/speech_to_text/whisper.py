@@ -9,7 +9,7 @@ from base import SpeechToText
 class Whisper(SpeechToText):
     def __init__(
         self,
-        model_id: str = ""
+        model_id: str = "openai/whisper-large-v3"
     ):
         self.model_id = model_id
         self.model = self._load_model()
@@ -30,10 +30,10 @@ class Whisper(SpeechToText):
 
     def transcribe(
         self,
-        audio_array: numpy.ndarray,
+        ndarray: numpy.ndarray,
         sr: int
     ) -> str:
-        inputs = self.processor(audio_array,
+        inputs = self.processor(ndarray,
                                 sr=sr, return_tensors="pt",
                                 truncation=False, padding="longest",
                                 return_attention_mask=True)

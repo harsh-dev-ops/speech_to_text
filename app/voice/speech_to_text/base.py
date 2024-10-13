@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import torch
 
+from conf.methods import Singleton
+
 
 class SpeechToText(ABC):
 
@@ -8,7 +10,6 @@ class SpeechToText(ABC):
     def _load_model(self):
         pass
 
-    @abstractmethod
     def _load_processor(self):
         pass
 

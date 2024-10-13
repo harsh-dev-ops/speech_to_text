@@ -1,8 +1,8 @@
 [
     {   "id": 1,
-        "name": "Noise Reduce"
+        "name": "Noise Reduction"
     },
     {   "id": 2,
-        "name": "Brain Speech"
+        "name": "Speech Brain Noise Reduction"
     }
 ]

@@ -23,12 +23,12 @@ class Wav2Vec2(SpeechToText):
 
     def transcribe(
         self,
-        audio_array: numpy.ndarray,
+        ndarray: numpy.ndarray,
         sr: int
     ) -> str:
 
         input_values = self.processor(
-            audio_array, sr=sr,
+            ndarray, sr=sr,
             return_tensors="pt", padding="longest").input_values
 
         logits = self.model(input_values).logits

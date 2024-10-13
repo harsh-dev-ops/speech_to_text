@@ -8,7 +8,7 @@ app = Flask(__name__)
 api = Api(app)
 
 
-class SpeechToText(Resource):
+class SpeechToTextView(Resource):
     def get(self):
         algorithms = ai_algorithms()
         return jsonify(algorithms)
@@ -40,7 +40,7 @@ class FileUpload(Resource):
 
 
 api.add_resource(FileUpload, '/upload')
-api.add_resource(SpeechToText, '/')
+api.add_resource(SpeechToTextView, '/')
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
