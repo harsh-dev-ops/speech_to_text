@@ -1,0 +1,1 @@
+conda create -n speech2text python=3.11 -y

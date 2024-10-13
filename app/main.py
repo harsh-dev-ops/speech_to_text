@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_restful import Resource, Api, reqparse, marshal, marshal_with
 
 from schema import VoiceRequestSchema, voice_request_parser
-from voice.algorithms import get_all_algorithms
+from voice.algorithms import ai_algorithms
 
 app = Flask(__name__)
 api = Api(app)
@@ -10,7 +10,7 @@ api = Api(app)
 
 class SpeechToText(Resource):
     def get(self):
-        algorithms = get_all_algorithms()
+        algorithms = ai_algorithms()
         return jsonify(algorithms)
 
     @marshal_with(VoiceRequestSchema)
