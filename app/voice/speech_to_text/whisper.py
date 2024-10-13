@@ -7,7 +7,10 @@ from base import SpeechToText
 
 
 class Whisper(SpeechToText):
-    def __init__(self, model_id):
+    def __init__(
+        self, 
+        model_id: str = ""
+        ):
         self.model_id = model_id
         self.model = self._load_model()
         self.device = self._get_device()
@@ -25,7 +28,11 @@ class Whisper(SpeechToText):
     def _load_processor(self):    
         return AutoProcessor.from_pretrained(self.model_id)
     
-    def predict(self, audio_array: numpy.ndarray, sampling_rate: int):
+    def transcribe(
+        self, 
+        audio_array: numpy.ndarray, 
+        sampling_rate: int
+        ) -> str:
         inputs = self.processor(audio_array,
                            sampling_rate=sampling_rate, return_tensors="pt",
                            truncation=False, padding="longest", 
