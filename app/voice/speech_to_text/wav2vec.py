@@ -9,12 +9,12 @@ from base import SpeechToText
 class Wav2Vec2(SpeechToText):
     def __init__(
         self,
-        model_id:str = "facebook/wav2vec2-large-960h"
+        model_id: str = "facebook/wav2vec2-large-960h"
     ):
         self.model_id = model_id
         self.model = self._load_model()
         self.processor = self._load_processor()
-    
+
     def _load_model(self):
         return Wav2Vec2ForCTC.from_pretrained(self.model_id)
 
@@ -22,19 +22,18 @@ class Wav2Vec2(SpeechToText):
         return Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-large-960h")
 
     def transcribe(
-        self, 
-        audio_array: numpy.ndarray, 
-        sampling_rate: int
-        ) -> str:
-        
+        self,
+        audio_array: numpy.ndarray,
+        sr: int
+    ) -> str:
+
         input_values = self.processor(
-            audio_array, sampling_rate=sampling_rate, 
+            audio_array, sr=sr,
             return_tensors="pt", padding="longest").input_values
-        
+
         logits = self.model(input_values).logits
-        
+
         predicted_ids = torch.argmax(logits, dim=-1)
         transcription = self.processor.batch_decode(predicted_ids)
-        
-        return transcription[0]
 
+        return transcription[0]

@@ -16,3 +16,4 @@ Werkzeug
 transformers 
 datasets[audio] 
 accelerate
+speechbrain
