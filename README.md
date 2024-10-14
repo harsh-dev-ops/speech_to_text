@@ -1,7 +1,6 @@
 # Introduction
 Flask APIs to generate speech to text. 
 
-
 ## Setup:
 OS:
 Linux/MacOS
