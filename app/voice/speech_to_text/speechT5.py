@@ -4,6 +4,7 @@ import torch
 import numpy
 
 from .base import SpeechToText, HfSpeechToText
+from conf.methods import Singleton
 
 
 class SpeechT5(SpeechToText, HfSpeechToText):

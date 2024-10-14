@@ -4,6 +4,7 @@ from datasets import load_dataset
 import torch
 
 from .base import HfSpeechToText, SpeechToText
+from conf.methods import Singleton
 
 
 class Wav2Vec2(HfSpeechToText, SpeechToText):

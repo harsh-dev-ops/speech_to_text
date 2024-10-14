@@ -1,10 +1,13 @@
+from curses import meta
 import io
 import scipy
 import speech_recognition
 import numpy as np
 
+from conf.methods import Singleton
 
-class SpeechRecognition:
+
+class SpeechRecognition():
 
     def __init__(
         self,

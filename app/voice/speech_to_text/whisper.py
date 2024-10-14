@@ -4,6 +4,7 @@ from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor
 from datasets import Audio, load_dataset
 
 from .base import HfSpeechToText, SpeechToText
+from conf.methods import Singleton
 
 
 class Whisper(HfSpeechToText, SpeechToText):
