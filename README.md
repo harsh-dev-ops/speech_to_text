@@ -2,7 +2,7 @@
 Flask APIs to generate speech to text. 
 
 ## Demo:
-[![Watch the video](https://raw.githubusercontent.com/username/repository/branch/path/to/thumbnail.jpg)](https://raw.githubusercontent.com/username/repository/branch/path/to/video.mp4)
+<video src='demo/demo.mov' width=1920/> 
 
 ## Setup:
 OS:
