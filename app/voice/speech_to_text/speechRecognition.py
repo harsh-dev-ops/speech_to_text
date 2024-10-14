@@ -29,10 +29,11 @@ class SpeechRecognition:
     ) -> str:
 
         byte_io = io.BytesIO(bytes())
-        scipy.io.wavefile.write(byte_io, sr, ndarray)
+        scipy.io.wavfile.write(byte_io, sr, ndarray)
         audio_bytes = byte_io.read()
         audio_data = speech_recognition.AudioData(audio_bytes, sr, 2)
 
+        text = None
         try:
             text = self._recognize(audio_data)
         except speech_recognition.UnknownValueError:

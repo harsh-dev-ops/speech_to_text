@@ -9,7 +9,7 @@ class FileToBase64:
     def __init__(self):
         pass
 
-    def base64_string(
+    def to_base64_string(
         self,
         audio_file: str
     ) -> str:
@@ -35,16 +35,16 @@ class AudioToArray:
     ) -> tuple[np.ndarray, int]:
 
         audio_stream = self.to_audio_stream(base64_string)
-        audio_data, sample_rate = librosa.load(audio_stream)
-        return np.array(audio_data), sample_rate
+        audio_data, sample_rate = librosa.load(audio_stream, sr=16000)
+        return audio_data, sample_rate
 
     def audio_file_to_ndarray(
         self,
         path: str
     ) -> tuple[np.ndarray, int]:
 
-        audio_data, sample_rate = librosa.load(path)
-        return np.array(audio_data), sample_rate
+        audio_data, sample_rate = librosa.load(path, sr=16000)
+        return audio_data, sample_rate
 
 
 class AudioConverter(FileToBase64, AudioToArray):
@@ -55,9 +55,8 @@ class AudioConverter(FileToBase64, AudioToArray):
     ):
         self.base64String = base64String
         self.path = path
-        self.data, self.sr = self._load_audio()
 
-    def _load_audio(
+    def to_ndarray(
         self
     ):
         if self.base64String:

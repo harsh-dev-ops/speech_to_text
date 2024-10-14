@@ -5,6 +5,13 @@ import torch
 from conf.methods import Singleton
 
 
+"""
+Methods are deprecated and not working with 
+numpy.ndarray
+TODO: fix the issue
+"""
+
+
 class SpeechBrainNoiseReducer():
     def __init__(
             self,
@@ -19,10 +26,10 @@ class SpeechBrainNoiseReducer():
         return SepformerSeparation.from_hparams(
             source=self.model_id, savedir=self.savedir)
 
-    def reduice_noise(
+    def reduce_noise(
             self,
             ndarray: np.ndarray,
             sr: int
     ):
         tensors = torch.from_numpy(ndarray)
-        return self.model.separate_batch(tensors)
+        return self.model.forward(tensors)

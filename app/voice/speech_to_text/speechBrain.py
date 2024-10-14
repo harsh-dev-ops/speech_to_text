@@ -2,7 +2,15 @@ from speechbrain.inference import EncoderDecoderASR
 import numpy as np
 import torch
 
-from base import SpeechToText
+from .base import SpeechToText
+
+
+"""
+This is deprecated and not working.
+Need to supoort numpy.ndarray,
+
+TODO: Fix the issue
+"""
 
 
 class CustomEncoderDecoderASR(EncoderDecoderASR):
@@ -32,6 +40,7 @@ class CustomEncoderDecoderASR(EncoderDecoderASR):
         predicted_words, predicted_tokens = self.transcribe_batch(
             batch, rel_length
         )
+        print("speech Predicted")
         return predicted_words[0]
 
 
@@ -46,12 +55,13 @@ class SpeechBrain(SpeechToText):
         self.model = self._load_model()
 
     def _load_model(self):
-        return CustomEncoderDecoderASR.from_hparams(source=self.model_id,
-                                                    savedir=self.save_dir)
+        return EncoderDecoderASR.from_hparams(source=self.model_id,
+                                              savedir=self.save_dir)
 
     def transcribe(
         self,
         ndarray: np.ndarray,
         sr: int
     ):
-        return self.model.transcribe_ndarray(ndarray, sr).lower()
+
+        return self.model.transcribe_ndarray(ndarray, sr)

@@ -1,2 +1,2 @@
-from noiseReduce import BaseNoiseReducer
-from speechBrain import SpeechBrainNoiseReducer
+from .noiseReduce import BaseNoiseReducer
+from .speechBrain import SpeechBrainNoiseReducer

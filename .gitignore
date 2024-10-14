@@ -1,0 +1,7 @@
+*.pt
+*.mp3
+*.ckpt
+*.yaml
+.DS_Store
+*.ipynb_checkpoints
+*.pyc

@@ -16,10 +16,28 @@ voice_request_parser.add_argument(
     required=True,
     help="base64String needed in string format."
 )
+voice_request_parser.add_argument(
+    'speechToText',
+    type=int,
+    required=False,
+    help="speechToText needed in int format."
+)
+voice_request_parser.add_argument(
+    'enableNoiseReduction',
+    type=bool,
+    required=False,
+    help="enableNoiseReduction needed in bool format."
+)
+voice_request_parser.add_argument(
+    'noiseReducer',
+    type=int,
+    required=False,
+    help="noiseReducer needed in int format."
+)
 
 
 class VoiceRequest(BaseModel):
     base64String: str | None = None
-    speechToText: int = 1
+    speechToText: int = 2
     enableNoiseReduction: bool = True
     noiseReducer: int = 1

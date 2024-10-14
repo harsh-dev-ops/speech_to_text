@@ -1,6 +1,8 @@
+import os
+
 from voice.utils.audio import AudioConverter
 from voice.noise_reduction import SpeechBrainNoiseReducer, BaseNoiseReducer
-from voice.speech_to_text import SpeechBrain, SpeechRecognition, Wav2Vec2, Whisper
+from voice.speech_to_text import SpeechT5, SpeechRecognition, Wav2Vec2, Whisper
 from voice.modules.devices import torch_gc
 from schema import VoiceRequest, VoiceRequestSchema
 
@@ -9,15 +11,18 @@ class SpeechToTextService:
 
     def __init__(
         self,
-        transcriber: SpeechBrain | Whisper | Wav2Vec2 | SpeechRecognition,
+        transcriber: SpeechT5 | Whisper | Wav2Vec2 | SpeechRecognition,
         noise_reducer: SpeechBrainNoiseReducer | BaseNoiseReducer | None = None,
         base64String: str | None = None,
         path: str | None = None
     ):
         self.transcriber = transcriber
         self.noise_reducer = noise_reducer
+        self.audio, self.sr = self._covert_audio(base64String, path)
+
+    def _covert_audio(self, base64String, path):
         audio = AudioConverter(base64String, path)
-        self.audio, self.sr = audio.data, audio.sr
+        return audio.to_ndarray()
 
     def transcribe(
         self,
@@ -27,6 +32,33 @@ class SpeechToTextService:
                 self.audio, self.sr
             )
         return self.transcriber.transcribe(self.audio, self.sr)
+
+
+class FileService:
+    def __init__(self, save_dir="upload"):
+        self.save_dir = save_dir
+
+        if not os.path.exists(self.save_dir):
+            os.makedirs(self.save_dir)
+
+    def _save(self, file):
+        path = os.path.join(self.save_dir, file.filename)
+        file.save(path)
+        return path
+
+    def upload(self, file):
+        if file.filename == '':
+            return {'message': 'No selected file'}, 400
+        try:
+            self._save(file)
+            return {'message': 'File uploaded successfully'}, 201
+        except Exception as e:
+            return {'message': 'Failed to upload file: ' + str(e)}, 500
+
+    def base64_string(self, file):
+        path = self._save(file)
+        audio = AudioConverter()
+        return audio.to_base64_string(path)
 
 
 class SpeechToTextServiceCreator:
@@ -72,8 +104,8 @@ class SpeechToTextServiceCreator:
     def _get_noise_reducer(noiseReducer: int):
         if noiseReducer == 1:
             return BaseNoiseReducer()
-        elif noiseReducer == 2:
-            return SpeechBrainNoiseReducer()
+        # elif noiseReducer == 2:
+        #     return SpeechBrainNoiseReducer()
         else:
             raise Exception("Invalid noise reducer.")
 
@@ -86,6 +118,7 @@ class SpeechToTextServiceCreator:
         elif speechToText == 3:
             return Wav2Vec2()
         elif speechToText == 4:
-            return SpeechBrain()
+            # return SpeechBrain()
+            return SpeechT5()
         else:
             raise Exception("Invalid speech to text.")

@@ -2,7 +2,7 @@ import numpy
 from scipy.io import wavfile
 import noisereduce as nr
 
-from base import NoiseReducer
+from .base import NoiseReducer
 
 
 class BaseNoiseReducer(NoiseReducer):

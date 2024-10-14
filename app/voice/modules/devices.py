@@ -6,7 +6,7 @@ from packaging import version
 import torch
 
 if sys.platform == "darwin":
-    from modules import mac_specific
+    from . import mac_specific
 
 
 def check_for_mps() -> bool:
