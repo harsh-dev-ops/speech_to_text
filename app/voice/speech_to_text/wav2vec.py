@@ -20,7 +20,7 @@ class Wav2Vec2(HfSpeechToText, SpeechToText):
         return Wav2Vec2ForCTC.from_pretrained(self.model_id)
 
     def _load_processor(self):
-        return Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-large-960h")
+        return Wav2Vec2Processor.from_pretrained(self.model_id)
 
     def transcribe(
         self,

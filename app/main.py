@@ -9,11 +9,12 @@ from services import SpeechToTextServiceCreator, FileService
 app = Flask(__name__)
 api = Api(app)
 
-
-class SpeechToTextBase64Resource(Resource):
+class SpeechToTextResource(Resource):
     def get(self):
         algorithms = ai_algorithms()
         return jsonify(algorithms)
+
+class SpeechToTextBase64Resource(Resource):
 
     # @marshal_with(VoiceRequestSchema)
     def post(self):
@@ -41,9 +42,6 @@ class SpeechToTextBase64Resource(Resource):
 
 
 class SpeechToTextFileResource(Resource):
-    def get(self):
-        algorithms = ai_algorithms()
-        return jsonify(algorithms)
 
     # @marshal_with(VoiceRequestSchema)
     def post(self):
@@ -98,6 +96,7 @@ class FileToBase64Resource(Resource):
         return jsonify({"base64String": base64String})
 
 
+api.add_resource(SpeechToTextResource, '/')
 api.add_resource(FileUploadResource, '/media')
 api.add_resource(FileToBase64Resource, '/fileTobase64')
 api.add_resource(SpeechToTextBase64Resource, '/speechToText/base64')
