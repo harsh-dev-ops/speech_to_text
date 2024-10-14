@@ -31,7 +31,9 @@ class SpeechToTextService:
             self.audio = self.noise_reducer.reduce_noise(
                 self.audio, self.sr
             )
-        return self.transcriber.transcribe(self.audio, self.sr)
+        transcription = self.transcriber.transcribe(self.audio, self.sr)
+        # torch_gc()
+        return transcription
 
 
 class FileService:
