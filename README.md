@@ -1,6 +1,37 @@
 # Introduction
 Flask APIs to generate speech to text. 
 
+## Setup:
+OS:
+Linux/MacOS
+
+Python:
+python=3.11
+
+Miniconda:
+```bash
+conda create -n speech2text python=3.11 -y
+
+conda activate speech2text
+
+pip install -r requirements.txt
+```
+
+Venv:
+```bash
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+## Start:
+```bash
+python app/main.py
+```
+
+
 ## Routes:
 
 ### Get all Algorithms
