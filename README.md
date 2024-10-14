@@ -45,7 +45,7 @@ payload = json.dumps({
   "audio": "some str"
 })
 headers = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json'
 }
 
 response = requests.request("GET", url, headers=headers, data=payload)
@@ -62,11 +62,15 @@ import requests
 url = "http://localhost:8000/fileTobase64"
 
 payload = {}
+
+
+filename = 'harvard.wav'
+audio_file_path = "upload/harvard.wav"
+content_type = 'audio/wav' # or 'audio/mpeg'
+
 files=[
-('file',('harvard.wav',open('/Users/harsh/Desktop/ml-ops/interview/vizualeez/assesment/speech_to_text/upload/harvard.wav','rb'),'audio/wav'))
+  ('file',(filename, open(audio_file_path,'rb'), content_type))
 ]
-headers = {
-}
 
 response = requests.request("POST", url, headers=headers, data=payload, files=files)
 
@@ -85,7 +89,7 @@ url = "http://localhost:8000/media"
 payload = {}
 
 filename = 'harvard.wav'
-audio_file_path = "/Users/harsh/Desktop/ml-ops/interview/vizualeez/assesment/speech_to_text/upload/harvard.wav"
+audio_file_path = "upload/harvard.wav"
 content_type = 'audio/wav' # or 'audio/mpeg'
 
 files=[
@@ -114,7 +118,7 @@ payload = {'speechToText': '2',
 
 
 filename = 'harvard.wav'
-audio_file_path = "/Users/harsh/Desktop/ml-ops/interview/vizualeez/assesment/speech_to_text/upload/harvard.wav"
+audio_file_path = "upload/harvard.wav"
 content_type = 'audio/wav' # or 'audio/mpeg'
 
 files=[
